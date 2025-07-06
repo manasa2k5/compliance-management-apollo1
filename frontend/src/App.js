@@ -61,7 +61,7 @@ const [auditLogs, setAuditLogs] = useState([]);
   const [reportDept, setReportDept] = useState("All");
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const res = await axios.post("https://apollo-backend-8hp4.onrender.com/api/auth/login", { email, password });
 
 // ✅ Save token to localStorage
 localStorage.setItem("token", res.data.token);
@@ -87,7 +87,7 @@ const userId = userInfo?._id;
 
   const fetchTasks = async () => {
     try {
-    const res = await axios.get("http://localhost:5000/api/tasks", {
+    const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/api/tasks", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}` // ✅ add this
   },
@@ -119,7 +119,7 @@ useEffect(() => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users");
+      const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/users");
       setUsers(res.data);
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -131,7 +131,7 @@ useEffect(() => {
     if (!newRole) return alert("Please select a role");
 
     try {
-      await axios.put(`http://localhost:5000/api/users/${userId}/role`, {
+      await axios.put(`https://apollo-backend-8hp4.onrender.com/api/users/${userId}/role`, {
         role: newRole,
       });
       toast.success("Role updated successfully!");
@@ -220,7 +220,7 @@ const getStatusLabel = (status, dueDate) => {
 
 const fetchOverdueTasks = async () => {
   try {
-   const res = await axios.get("http://localhost:5000/api/tasks/overdue", {
+   const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/tasks/overdue", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}` // ✅ add this
   },
@@ -254,7 +254,7 @@ useEffect(() => {
 
 const fetchAuditLogs = async () => {
   try {
-    const res = await axios.get("http://localhost:5000/api/auditlogs");
+    const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/auditlogs");
     setAuditLogs(res.data);
   } catch (err) {
     console.error("❌ Failed to fetch audit logs", err);
@@ -282,7 +282,7 @@ const handleCreateUser = async () => {
 
 
   try {
-    await axios.post("http://localhost:5000/api/auth/register", newUser);
+    await axios.post( "https://apollo-backend-8hp4.onrender.com/api/auth/register", newUser);
     toast.success("User created successfully!");
     fetchUsers(); // If you're displaying the user list
     // Clear form fields if needed
@@ -520,7 +520,7 @@ formData.append("assignedTo", assignedTo);
 formData.append("createdBy", userInfo._id);  // ✅ NEW
 
 if (file) formData.append("file", file);
-await axios.post("http://localhost:5000/api/tasks", formData, {
+await axios.post("https://apollo-backend-8hp4.onrender.com/api/tasks", formData, {
   headers: {
     "Content-Type": "multipart/form-data",
     Authorization: `Bearer ${localStorage.getItem("token")}` // ✅ add this line
@@ -642,7 +642,7 @@ await axios.post("http://localhost:5000/api/tasks", formData, {
         <td>
   {task.file ? (
     <a
-      href={`http://localhost:5000/uploads/${task.file}`}
+      href={`https://apollo-backend-8hp4.onrender.com/uploads/${task.file}`}
       target="_blank"
       rel="noopener noreferrer"
       style={{ color: "#4c1d95", fontWeight: 500 }}
@@ -661,7 +661,7 @@ await axios.post("http://localhost:5000/api/tasks", formData, {
               className="complete-btn"
               onClick={async () => {
                 try {
-                 await axios.put(`http://localhost:5000/api/tasks/${task._id}/status`, {
+                 await axios.put(`https://apollo-backend-8hp4.onrender.com/api/tasks/${task._id}/status`, {
   status: "completed",
   updatedBy: userInfo._id,  // ✅ Add this
 }, {
@@ -685,7 +685,7 @@ await axios.post("http://localhost:5000/api/tasks", formData, {
             onClick={async () => {
               if (!window.confirm("Are you sure you want to delete this task?")) return;
               try {
-                await axios.delete(`http://localhost:5000/api/tasks/${task._id}`, {
+                await axios.delete(`https://apollo-backend-8hp4.onrender.com/api/tasks/${task._id}`, {
   data: { performedBy: userInfo._id },  // ✅ Add this
 headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -896,7 +896,7 @@ headers: {
                   return;
                 }
                 try {
-                  await axios.post("http://localhost:5000/api/users", {
+                  await axios.post("https://apollo-backend-8hp4.onrender.com/api/users", {
 
                     name: title,
                     email,
@@ -1041,7 +1041,7 @@ headers: {
                           onClick={async () => {
                             if (!window.confirm("Are you sure you want to delete this user?")) return;
                             try {
-                              await axios.delete(`http://localhost:5000/api/users/${user._id}`);
+                              await axios.delete(`https://apollo-backend-8hp4.onrender.com/api/users/${user._id}`);
                               fetchUsers();
                               toast.success("User deleted!");
                             } catch (err) {
