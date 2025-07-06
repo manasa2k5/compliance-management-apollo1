@@ -1,0 +1,64 @@
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  background: #e5efff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #2563eb;
+}
+.login-container p {
+  margin-bottom: 20px;
+  color: #374151;
+}
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.login-container button {
+  background: #2563eb;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.login-container {
+  background: url('https://apollouniversity.edu.in/wp-content/uploads/2022/11/campus-5.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.login-container::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%; width: 100%;
+  background: rgba(0,0,0,0.5); /* overlay */
+  backdrop-filter: blur(2px);
+}
+.login-box {
+  z-index: 10;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  max-width: 400px;
+  width: 100%;
+}
