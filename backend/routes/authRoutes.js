@@ -25,15 +25,14 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.json({ message: "Login successful", token, user });
+
+    return res.json({ message: "Login successful", token, user });
   } catch (err) {
-    res.status(500).json({ message: "Login error", error: err.message });
+    console.error("❌ Login error:", err); // ADD THIS
+    res.status(500).json({ message: "Login failed, please try again" });
   }
 });
-router.get("/debug-users", async (req, res) => {
-  const users = await User.find();
-  res.json(users);
-});
+
 
 
 
