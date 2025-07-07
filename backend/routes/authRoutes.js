@@ -30,6 +30,10 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Login error", error: err.message });
   }
 });
+router.get("/debug-users", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
 
 
 
@@ -57,6 +61,15 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     console.error("Error during registration:", err);
     res.status(500).json({ message: "Error registering user", error: err.message });
+  }
+});
+
+router.get("/debug-users", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching users", error: err.message });
   }
 });
 

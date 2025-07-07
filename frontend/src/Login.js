@@ -10,7 +10,7 @@ function Login({ onLoginSuccess }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://apollo-backend-8hp4.onrender.com/api/auth/login", {
         email: loginEmail,
         password: loginPassword,
       });
@@ -36,7 +36,7 @@ function Login({ onLoginSuccess }) {
     if (!newPass) return;
 
     try {
-      await axios.put("http://localhost:5000/api/auth/reset-password-by-email", {
+      await axios.put("https://apollo-backend-8hp4.onrender.com/api/auth/reset-password-by-email", {
         email,
         password: newPass,
       });

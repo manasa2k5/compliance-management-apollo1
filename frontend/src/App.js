@@ -54,29 +54,31 @@ const [overdueTasks, setOverdueTasks] = useState([]);
 const [file, setFile] = useState(null);
 const [auditLogs, setAuditLogs] = useState([]);
 
+const [reportDept, setReportDept] = useState("All");
 
   
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDayTasks, setSelectedDayTasks] = useState([]);
-  const [reportDept, setReportDept] = useState("All");
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post("https://apollo-backend-8hp4.onrender.com/api/auth/login", { email, password });
+const handleLogin = async () => {
+  try {
+    const res = await axios.post("https://apollo-backend-8hp4.onrender.com/api/auth/login", { email, password });
 
-// ✅ Save token to localStorage
-localStorage.setItem("token", res.data.token);
+    localStorage.setItem("token", res.data.token);
+    setUserInfo(res.data.user);
+    setLoggedIn(true);
+    setCurrentTab("dashboard");
+    fetchTasks();
+    fetchUsers();
+    toast.success("Login successful");
 
-setUserInfo(res.data.user);
-setLoggedIn(true);
-setCurrentTab("dashboard");
-fetchTasks();
-fetchUsers();
-toast.success("Login successful");
+  } catch (err) {
+    console.error("❌ Login failed:", err?.response?.data || err.message);
 
-    } catch (err) {
-      toast.error("Invalid credentials");
-    }
-  };
+    const message = err?.response?.data?.message || "Login failed. Please try again.";
+    toast.error(message);
+  }
+};
+
   const userRole = userInfo?.role; // e.g., "super_admin", "dept_admin", "executive"
 const userDept = userInfo?.department;
 const userId = userInfo?._id;
