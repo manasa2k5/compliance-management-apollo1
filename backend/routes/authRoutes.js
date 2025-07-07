@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
+console.log("🔑 JWT_SECRET in server:", process.env.JWT_SECRET);
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     return res.json({ message: "Login successful", token, user });
@@ -71,6 +71,7 @@ router.get("/debug-users", async (req, res) => {
     res.status(500).json({ message: "Error fetching users", error: err.message });
   }
 });
+
 
 
 

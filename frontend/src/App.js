@@ -72,7 +72,6 @@ const handleLogin = async () => {
     toast.success("Login successful");
 
   } catch (err) {
-    console.error("❌ Login failed:", err?.response?.data || err.message);
 
     const message = err?.response?.data?.message || "Login failed. Please try again.";
     toast.error(message);
@@ -89,7 +88,7 @@ const userId = userInfo?._id;
 
   const fetchTasks = async () => {
     try {
-    const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/api/tasks", {
+    const res = await axios.get("https://apollo-backend-8hp4.onrender.com/api/tasks", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}` // ✅ add this
   },
