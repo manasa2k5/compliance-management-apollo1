@@ -62,7 +62,7 @@ const [reportDept, setReportDept] = useState("All");
 const handleLogin = async () => {
   try {
     const res = await axios.post("https://apollo-backend-8hp4.onrender.com/api/auth/login", { email, password });
-
+console.log("✅ Login Response:", res.data);
     localStorage.setItem("token", res.data.token);
     setUserInfo(res.data.user);
     setLoggedIn(true);
@@ -72,10 +72,9 @@ const handleLogin = async () => {
     toast.success("Login successful");
 
   } catch (err) {
-
-    const message = err?.response?.data?.message || "Login failed. Please try again.";
-    toast.error(message);
-  }
+console.error("❌ Login Error:", err.response?.data || err.message);
+  toast.error(err.response?.data?.message || "Login failed, please try again");
+}
 };
 
   const userRole = userInfo?.role; // e.g., "super_admin", "dept_admin", "executive"
